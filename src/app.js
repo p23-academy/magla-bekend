@@ -22,6 +22,7 @@ app.get('/', (req, res) => {
 require('./users')(app)
 require('./categories')(app)
 require('./items')(app)
+require('./orders')(app)
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`)
