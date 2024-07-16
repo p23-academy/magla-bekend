@@ -50,4 +50,18 @@ module.exports = function (app) {
       return res.status(400).json({error})
     }
   })
+
+  app.post("/api/v1/orders/:id", async (req, res) => {
+    try {
+      const orderId = req.params.id
+      await Order.updateOne({_id: orderId}, {
+        status: req.body.status,
+      })
+      const order = await Order.findById(orderId)
+      return res.status(200).json(order)
+    } catch (error) {
+      console.log(error)
+      return res.status(400).json({error})
+    }
+  })
 }

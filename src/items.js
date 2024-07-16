@@ -33,13 +33,14 @@ module.exports = function (app) {
   app.post("/api/v1/items/:id", async (req, res) => {
     try {
       const itemId = req.params.id
-      const item = await Item.updateOne({_id: itemId}, {
+      await Item.updateOne({_id: itemId}, {
         name: req.body.name,
         description: req.body.description,
         price: req.body.price,
         category: req.body.category,
         imageUrl: req.body.imageUrl,
       })
+      const item = Item.findById(itemId)
       return res.status(200).json(item)
     } catch (error) {
       console.log(error)

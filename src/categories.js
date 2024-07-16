@@ -26,9 +26,10 @@ module.exports = function (app) {
   app.post("/api/v1/categories/:id", async (req, res) => {
     try {
       const categoryId = req.params.id
-      const category = await Category.updateOne({_id: categoryId}, {
+      await Category.updateOne({_id: categoryId}, {
         name: req.body.name,
       })
+      const category = await Category.findById(categoryId)
       return res.status(200).json(category)
     } catch (error) {
       console.log(error)
