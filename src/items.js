@@ -40,7 +40,7 @@ module.exports = function (app) {
         category: req.body.category,
         imageUrl: req.body.imageUrl,
       })
-      const item = Item.findById(itemId)
+      const item = await Item.findById(itemId)
       return res.status(200).json(item)
     } catch (error) {
       console.log(error)
